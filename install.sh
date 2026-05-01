@@ -13,13 +13,13 @@ echo "This script will request sudo access to install prerequisites."
 install_packages() {
     if command -v apt &> /dev/null; then
         sudo apt update
-        sudo apt install -y gnome-tweaks gnome-shell-extension-prefs git curl unzip python3 dconf-cli
+        sudo apt install -y gnome-tweaks gnome-shell-extension-prefs git curl unzip python3 dconf-cli fonts-jetbrains-mono
     elif command -v dnf &> /dev/null; then
-        sudo dnf install -y gnome-tweaks gnome-extensions-app git curl unzip python3 dconf
+        sudo dnf install -y gnome-tweaks gnome-extensions-app git curl unzip python3 dconf jetbrains-mono-fonts
     elif command -v pacman &> /dev/null; then
-        sudo pacman -S --noconfirm gnome-tweaks gnome-shell-extensions git curl unzip python3 dconf
+        sudo pacman -S --noconfirm gnome-tweaks gnome-shell-extensions git curl unzip python3 dconf ttf-jetbrains-mono
     else
-        echo "⚠️  Unsupported package manager. Please manually install: gnome-tweaks, git, curl, unzip, dconf."
+        echo "⚠️  Unsupported package manager. Please manually install: gnome-tweaks, git, curl, unzip, dconf, and jetbrains-mono font."
         read -p "Press Enter to continue anyway..."
     fi
 }
@@ -134,7 +134,14 @@ cd ..
 
 # 4. Configure Extensions via Dconf
 echo ""
-echo "🪄 Configuring Extension Preferences (Blur, Dock, etc.)..."
+echo "🪄 Configuring Extension Preferences (Blur, Dock, Animations, etc.)..."
+
+# Enable System-wide animations (required for maximize/minimize smooth effects)
+dconf write /org/gnome/desktop/interface/enable-animations true
+
+# Configure Magic Lamp (macOS Genie effect for minimizing)
+dconf write /org/gnome/shell/extensions/com/github/hermes83/compiz-alike-magic-lamp-effect/duration 400.0
+dconf write /org/gnome/shell/extensions/ncom/github/hermes83/compiz-alike-magic-lamp-effect/duration 400.0
 
 # Dash to Dock configuration
 dconf write /org/gnome/shell/extensions/dash-to-dock/dock-position "'BOTTOM'"
@@ -157,6 +164,19 @@ gnome-extensions enable blur-my-shell@aunetx || true
 gnome-extensions enable dash-to-dock@micxgx.gmail.com || true
 gnome-extensions enable compiz-alike-magic-lamp-effect@hermes83.github.com || true
 
+# 5. Configure Kitty Terminal
+echo ""
+echo "🐱 Configuring Kitty Terminal (Animations & Traffic Lights)..."
+mkdir -p ~/.config/kitty
+# Force XWayland so Kitty gets the GTK theme's macOS traffic light window decorations (which animate on hover)
+grep -q "^linux_display_server x11" ~/.config/kitty/kitty.conf 2>/dev/null || echo -e "\n# Use X11 to get GTK macOS traffic light decorations\nlinux_display_server x11" >> ~/.config/kitty/kitty.conf
+# Enable cursor trail animations
+grep -q "^cursor_trail 1" ~/.config/kitty/kitty.conf 2>/dev/null || echo -e "\n# Enable smooth cursor trail animations\ncursor_trail 1" >> ~/.config/kitty/kitty.conf
+# Ensure Kitty uses transparency for the glass effect
+grep -q "^background_opacity " ~/.config/kitty/kitty.conf 2>/dev/null || echo -e "\n# Glass effect opacity\nbackground_opacity 0.85" >> ~/.config/kitty/kitty.conf
+# Set font to JetBrains Mono
+grep -q "^font_family " ~/.config/kitty/kitty.conf 2>/dev/null || echo -e "\n# Set font to JetBrains Mono\nfont_family JetBrains Mono" >> ~/.config/kitty/kitty.conf
+
 # Cleanup
 cd "$HOME"
 rm -rf "$TEMP_DIR"
@@ -169,3 +189,5 @@ echo "1. Press 'Alt + F2', type 'r', and hit Enter (if on X11) OR log out and lo
 echo "2. Open 'GNOME Tweaks' -> Appearance."
 echo "3. Ensure your Icons, Cursor, and Legacy Applications are set to 'WhiteSur'."
 echo "4. Your Files and Terminal apps are now automatically blurred!"
+echo "5. Kitty Terminal now has macOS traffic lights, JetBrains Mono font, and cursor animations."
+echo "6. System window animations (including the Magic Lamp Genie effect for minimizing) are fully enabled."

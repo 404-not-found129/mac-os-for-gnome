@@ -14,6 +14,7 @@ The included `install.sh` script is fully automated. It will:
 3. Download and apply the WhiteSur GTK, Icon, and Cursor themes.
 4. Apply specific GTK4/libadwaita tweaks to ensure **Files and Terminal have the transparent/blurred look.**
 5. Automatically configure all extension settings (like placing the dock at the bottom).
+6. Configure **Kitty Terminal** with macOS traffic lights, smooth cursor animations, and a glassy transparent background.
 
 Open your terminal and run:
 
@@ -44,5 +45,8 @@ Once the script has finished:
 The script automatically sets up WhiteSur's "Glassy" layout and enables the `Blur my Shell` extension for applications. It also disables dynamic opacity, so your Terminal and Files stay blurred even when focused. If your Files or Terminal aren't blurred:
 1. Ensure the `Blur my Shell` extension is active in the "Extensions" app.
 2. Open its settings > **Applications** tab > ensure **Blur** is enabled and **Dynamic Opacity** is turned off.
+
+### 🐱 Kitty Terminal Integration
+If you use **Kitty**, the setup script automatically configures it to use X11 decorations so it perfectly inherits the WhiteSur GTK macOS traffic light window controls. Because it uses the system window manager, it fully supports GNOME's smooth **maximize** animations and the **macOS Genie (Magic Lamp) minimize effect**. It also enables smooth cursor trail animations, built-in background transparency to match the rest of the glassy aesthetic, and sets the font to the beautiful **JetBrains Mono**.
 
 Enjoy your new, highly polished macOS-like desktop! 🍎
