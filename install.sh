@@ -83,7 +83,8 @@ extensions = [
     "dash-to-dock@micxgx.gmail.com",
     "blur-my-shell@aunetx",
     "user-theme@gnome-shell-extensions.gcampax.github.com",
-    "compiz-alike-magic-lamp-effect@hermes83.github.com"
+    "compiz-alike-magic-lamp-effect@hermes83.github.com",
+    "Move_Clock@rmy.pobox.com"
 ]
 
 for ext in extensions:
@@ -112,7 +113,7 @@ cd WhiteSur-gtk-theme
 # -s standard: Standard window controls
 # -l: Install for libadwaita (GTK4) -> Themes Files and Terminal!
 # --round: Rounded maximized windows
-./install.sh -t all -N glassy -s standard -l --round
+./install.sh -t all -N glassy -s standard -l --round --shell -i apple
 
 # Optional: Apply dash to dock tweaks from WhiteSur
 ./tweaks.sh -d || true
@@ -163,6 +164,7 @@ gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com || 
 gnome-extensions enable blur-my-shell@aunetx || true
 gnome-extensions enable dash-to-dock@micxgx.gmail.com || true
 gnome-extensions enable compiz-alike-magic-lamp-effect@hermes83.github.com || true
+gnome-extensions enable Move_Clock@rmy.pobox.com || true
 
 # 5. Configure Kitty Terminal
 echo ""

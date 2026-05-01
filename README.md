@@ -2,7 +2,7 @@
 
 This project provides an all-in-one setup script to easily transform your GNOME Desktop environment into a beautiful, macOS-like interface.
 
-It utilizes the highly-acclaimed **WhiteSur** theme family by [vinceliuice](https://github.com/vinceliuice) and automatically installs and configures essential GNOME extensions to recreate the macOS UX layout (like the Dock, top menu bar, and system-wide blur effects for Nautilus Files and Terminal).
+It utilizes the highly-acclaimed **WhiteSur** theme family by [vinceliuice](https://github.com/vinceliuice) and automatically installs and configures essential GNOME extensions to recreate the macOS UX layout (like the Dock, the Apple logo top menu bar, and system-wide blur effects for Nautilus Files and Terminal).
 
 ---
 
@@ -10,7 +10,7 @@ It utilizes the highly-acclaimed **WhiteSur** theme family by [vinceliuice](http
 
 The included `install.sh` script is fully automated. It will:
 1. Install necessary system prerequisites (`gnome-tweaks`, `unzip`, `dconf`, etc.)
-2. Download and install necessary GNOME Extensions (Dash to Dock, Blur my Shell, Magic Lamp, User Themes).
+2. Download and install necessary GNOME Extensions (Dash to Dock, Blur my Shell, Magic Lamp, Move Clock, User Themes).
 3. Download and apply the WhiteSur GTK, Icon, and Cursor themes.
 4. Apply specific GTK4/libadwaita tweaks to ensure **Files and Terminal have the transparent/blurred look.**
 5. Automatically configure all extension settings (like placing the dock at the bottom).
