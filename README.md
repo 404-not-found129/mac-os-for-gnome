@@ -1,52 +1,133 @@
-# macOS for GNOME 🍏
+# macOS Tahoe for GNOME
 
-This project provides an all-in-one setup script to easily transform your GNOME Desktop environment into a beautiful, macOS-like interface.
+An all-in-one setup script that transforms your GNOME desktop into a faithful **macOS Tahoe** experience — liquid glass design language, floating dock, and macOS Tahoe wallpapers.
 
-It utilizes the highly-acclaimed **WhiteSur** theme family by [vinceliuice](https://github.com/vinceliuice) and automatically installs and configures essential GNOME extensions to recreate the macOS UX layout (like the Dock, the Apple logo top menu bar, and system-wide blur effects for Nautilus Files and Terminal).
+Uses the **MacTahoe GTK Theme** (based on WhiteSur) and a curated set of GNOME extensions.
 
 ---
 
-## ⚡ 1. Run the Setup Script
+## macOS Tahoe features covered
 
-The included `install.sh` script is fully automated. It will:
-1. Install necessary system prerequisites (`gnome-tweaks`, `unzip`, `dconf`, etc.)
-2. Download and install necessary GNOME Extensions (Dash to Dock, Blur my Shell, Magic Lamp, Move Clock, User Themes).
-3. Download and apply the WhiteSur GTK, Icon, and Cursor themes.
-4. Apply specific GTK4/libadwaita tweaks to ensure **Files and Terminal have the transparent/blurred look.**
-5. Automatically configure all extension settings (like placing the dock at the bottom).
-6. Configure **Kitty Terminal** with macOS traffic lights, smooth cursor animations, and a glassy transparent background.
+| macOS Tahoe Feature | Implementation |
+|---|---|
+| **Liquid glass UI** | MacTahoe GTK theme — blur version |
+| **Lake Tahoe wallpaper** | Day + night variants, auto-switches |
+| **Floating glass pill dock** | Dash to Dock + MacTahoe CSS tweaks + Blur my Shell |
+| Dock icon zoom on hover | Dash to Dock magnification |
+| Genie / Magic Lamp minimize | Compiz Magic Lamp Effect |
+| **Spotlight search** (Ctrl+Space) | Search Light extension |
+| **Apple logo menu bar** | Logo Menu extension |
+| **Translucent menu bar** | Blur my Shell — panel blur |
+| Blur / glass everywhere | Blur my Shell |
+| macOS window chrome (traffic lights) | MacTahoe GTK theme |
+| **Window controls on LEFT** | close / minimize / maximize |
+| macOS icons and cursors | WhiteSur Icon + Cursor themes |
+| Centered clock | Move Clock extension |
+| Activities button hidden | Just Perfection |
+| **Starts on Desktop** (not Activities) | Just Perfection startup-status |
+| **Hot corners** (top-left = Mission Control) | GNOME hot corners |
+| **Night Shift** | GNOME Night Light (auto schedule, 4000 K) |
+| **Dynamic Spaces / workspaces** | GNOME mutter dynamic workspaces |
+| **Tap-to-click + natural scroll** | Touchpad settings |
+| **Quick Look** (Space on a file) | GNOME Sushi |
+| Kitty: traffic light decorations | X11 display server mode |
+| Kitty: smooth cursor trail | cursor_trail + decay |
+| Kitty: glass terminal | background_opacity 0.85 |
 
-Open your terminal and run:
+---
+
+## Install
 
 ```bash
 chmod +x install.sh
 ./install.sh
 ```
 
-*(Note: The script asks for `sudo` initially to install package manager prerequisites like `gnome-tweaks` and `git`)*
+> The script asks for `sudo` once to install package prerequisites.
 
 ---
 
-## 🎨 2. Apply and Load the Themes
+## After installation
 
-Once the script has finished:
+### 1. Reload GNOME Shell
 
-1. **Reload GNOME Shell:**
-   - **X11:** Press `Alt + F2`, type `r`, and press Enter.
-   - **Wayland:** Log out of your desktop session and log back in.
-2. Open the **GNOME Tweaks** app.
-3. Go to the **Appearance** tab and set the following (if they aren't already set):
-   * **Icons:** `WhiteSur`
-   * **Cursor:** `WhiteSur`
-   * **Legacy Applications:** `WhiteSur-Light` or `WhiteSur-Dark`
-   * **Shell:** `WhiteSur-Light` or `WhiteSur-Dark`
+| Session | How |
+|---|---|
+| X11 | Press `Alt+F2`, type `r`, Enter |
+| Wayland | Log out and log back in |
 
-### 🪄 The "Blur Everywhere" Effect
-The script automatically sets up WhiteSur's "Glassy" layout and enables the `Blur my Shell` extension for applications. It also disables dynamic opacity, so your Terminal and Files stay blurred even when focused. If your Files or Terminal aren't blurred:
-1. Ensure the `Blur my Shell` extension is active in the "Extensions" app.
-2. Open its settings > **Applications** tab > ensure **Blur** is enabled and **Dynamic Opacity** is turned off.
+### 2. Apply themes in GNOME Tweaks
 
-### 🐱 Kitty Terminal Integration
-If you use **Kitty**, the setup script automatically configures it to use X11 decorations so it perfectly inherits the WhiteSur GTK macOS traffic light window controls. Because it uses the system window manager, it fully supports GNOME's smooth **maximize** animations and the **macOS Genie (Magic Lamp) minimize effect**. It also enables smooth cursor trail animations, built-in background transparency to match the rest of the glassy aesthetic, and sets the font to the beautiful **JetBrains Mono**.
+Open **GNOME Tweaks → Appearance** and set:
 
-Enjoy your new, highly polished macOS-like desktop! 🍎
+- **Icons:** `WhiteSur`
+- **Cursor:** `WhiteSur-cursors`
+- **Legacy Applications:** `MacTahoe-Dark`
+- **Shell:** `MacTahoe-Dark`
+
+### 3. macOS Tahoe features at a glance
+
+| Shortcut / Action | Result |
+|---|---|
+| `Ctrl+Space` | Spotlight-style search |
+| Hover dock icons | Magnification zoom |
+| Minimize a window | Genie / Magic Lamp animation |
+| Top-left hot corner | Mission Control (Activities) |
+| `Space` on a file in Files | Quick Look preview |
+| Two-finger swipe up | Activities overview |
+| Two-finger swipe between workspaces | macOS Spaces navigation |
+
+---
+
+## Liquid glass / blur
+
+MacTahoe's blur version gives the characteristic **liquid glass** look of macOS Tahoe. Blur my Shell is configured for:
+
+- All **application windows** (files, terminal, settings…)
+- The **panel / menu bar** (always translucent)
+- The **dock** (floating glass pill)
+- The **Activities overview**
+
+> **Incompatibility note:** `Rounded Window Corners` and `AppIndicator` extensions conflict with MacTahoe's blur pipeline and are disabled automatically. Re-enable them only if you switch to a non-blur theme variant.
+
+If blur stops working: open Blur my Shell settings → **Applications** tab → ensure **Enable all** is on and **Dynamic Opacity** is off.
+
+---
+
+## Wallpaper
+
+The MacTahoe Lake Tahoe wallpaper automatically switches:
+- **Light mode** → `MacTahoe-day.jpeg`
+- **Dark mode** → `MacTahoe-night.jpeg`
+
+Both are installed to `~/.local/share/backgrounds/` and registered with GNOME's background picker.
+
+---
+
+## Kitty Terminal
+
+Kitty uses X11 decorations to inherit MacTahoe's traffic-light window buttons. Configured with:
+
+- Traffic light close/minimize/maximize buttons
+- Genie animation on minimize (Magic Lamp)
+- Glass background (85 % opacity)
+- Smooth cursor trail
+- JetBrains Mono 13 pt
+- 16 px padding
+
+---
+
+## Extensions
+
+| Extension | Purpose |
+|---|---|
+| Dash to Dock | Floating glass pill dock |
+| Blur my Shell | Liquid glass / blur everywhere |
+| User Themes | MacTahoe shell theme |
+| Logo Menu | Apple logo top-left |
+| Move Clock | Center the clock |
+| Just Perfection | Hide Activities, fix startup |
+| Search Light | Ctrl+Space Spotlight |
+| Compiz Magic Lamp | Genie minimize animation |
+| ~~Rounded Window Corners~~ | Disabled — conflicts with MacTahoe blur |
+| ~~AppIndicator~~ | Disabled — conflicts with MacTahoe blur |
